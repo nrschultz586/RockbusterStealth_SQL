@@ -10,3 +10,6 @@ Which movies contributed the most/least to revenue gain?
 - Do sales figures vary between geographic regions?
 # Data
 Dataset used: [Rockbuster Stealth LLC data](http://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip)
+# Tableau Report
+Check out the data visualization for this analysis on Tableau:
+[https://public.tableau.com/app/profile/nicole.schultz/viz/RockbusterTableau/Story1](https://public.tableau.com/app/profile/nicole.schultz/viz/RockbusterTableau/Story1)
