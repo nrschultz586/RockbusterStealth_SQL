@@ -8,3 +8,5 @@ Which movies contributed the most/least to revenue gain?
 - Which countries are Rockbuster customers based in?
 - Where are customers with a high lifetime value based?
 - Do sales figures vary between geographic regions?
+# Data
+Dataset used: [Rockbuster Stealth LLC data](http://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip)
