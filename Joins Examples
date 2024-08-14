@@ -1,5 +1,5 @@
-# Exercise 3.7 (Career Foundry)
-# 1.	Write a query to find the top 10 countries for Rockbuster in terms of customer numbers. 
+Exercise 3.7 (Career Foundry)
+1.	Write a query to find the top 10 countries for Rockbuster in terms of customer numbers. 
 
 SELECT
   counry.country,
@@ -18,3 +18,72 @@ ORDER BY
   numbner_of_customers DESC
 LIMIT 
   10;
+
+2.	Next, write a query to identify the top 10 cities that fall within the top 10 countries you identified in step 
+
+SELECT 
+  country.country,  
+  city.city, 
+  COUNT(customer.customer_id) AS number_of_customers
+FROM 
+  customer
+JOIN
+  address ON address.address_id = customer.address_id
+JOIN 
+  city ON address.city_id = city.city_id
+JOIN 
+  country ON city.country_id = country.country_id
+WHERE country.country IN 
+  (
+    SELECT 
+      country.country
+    FROM 
+      customer
+    JOIN
+      address ON address.address_id = customer.address_id
+    JOIN 
+      city ON address.city_id = city.city_id
+    JOIN 
+      country ON city.country_id = country.country_id
+    GROUP BY 
+      country.country
+    ORDER BY 
+      COUNT(customer.customer_id) DESC
+    LIMIT 
+      10
+  )
+GROUP BY 
+  city.city, 
+  country.country
+ORDER BY 
+  number_of_customers DESC
+LIMIT 
+  10;
+
+
+3.	Now write a query to find the top 5 customers from the top 10 cities who’ve paid the highest total amounts to Rockbuster. The customer team would like to reward them for their loyalty!
+
+SELECT 
+  customer.customer_id, 
+  customer.first_name, 
+  customer.last_name,  
+  city.city, 
+  SUM(payment.amount) AS total_amount_paid
+FROM 
+  customer
+JOIN 
+  payment ON customer.customer_id = payment.customer_id
+JOIN 
+  address ON customer.address_id = address.address_id
+JOIN 
+  city ON address.city_id = city.city_id
+WHERE city.city IN ( 'Aurora','Atlixco','Xintai','Adoni','Dhule(Dhulia)','Kurashiki','Pingxiang','Sivas','Celaya','So Leopoldo')
+GROUP BY 
+  customer.customer_id, 
+  customer.first_name, 
+  customer.last_name,
+  city.city
+ORDER BY 
+  total_amount_paid DESC
+LIMIT 
+  5;
